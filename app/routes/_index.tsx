@@ -127,12 +127,54 @@ export default function Index() {
 }
 
 const exercises: Exercise[] = [
-  { id: 1, name: "Squats" },
-  { id: 2, name: "Lunges" },
-  { id: 3, name: "Pushups" },
-  { id: 4, name: "Pullups" },
-  { id: 5, name: "BB Strict Press" },
-  { id: 6, name: "BB Push Press" },
-  { id: 7, name: "Bench Press" },
-  { id: 8, name: "BB Rowing" },
+  { id: "1", name: "Squats" },
+  { id: "2", name: "Lunges" },
+  { id: "3", name: "Pushups" },
+  { id: "4", name: "Pullups" },
+  { id: "5", name: "BB Strict Press" },
+  { id: "6", name: "BB Push Press" },
+  { id: "7", name: "Bench Press" },
+  { id: "8", name: "BB Rowing" },
 ];
+
+const chestUnits: Unit[] = [
+  { id: "1", exercise: exercises[2], sets: 3, reps: 10 },
+  { id: "2", exercise: exercises[3], sets: 2, reps: 30 },
+  { id: "3", exercise: exercises[6], sets: 5, reps: 5 },
+];
+
+const legUnits: Unit[] = [
+  { id: "1", exercise: exercises[0], sets: 3, reps: 10 },
+  { id: "2", exercise: exercises[2], sets: 2, reps: 30 },
+  { id: "3", exercise: exercises[6], sets: 5, reps: 5 },
+];
+
+const warmupUnits: Unit[] = [
+  { id: "1", exercise: exercises[0], sets: 3, reps: 10 },
+  { id: "2", exercise: exercises[1], sets: 2, reps: 30 },
+];
+
+const chestDay: Workout = {
+  id: "1",
+  name: "Chestday",
+  units: [...warmupUnits, ...chestUnits],
+};
+
+const legDay: Workout = {
+  id: "1",
+  name: "Legday",
+  units: [...warmupUnits, ...legUnits],
+};
+
+const plan: Plan = {
+  id: "1",
+  workouts: {
+    monday: [chestDay],
+    tuesday: [],
+    wednesday: [legDay],
+    thursday: [],
+    friday: [chestDay],
+    saturday: [],
+    sunday: [legDay],
+  },
+};
