@@ -111,4 +111,8 @@ const exercises: Exercise[] = [
   { id: 2, name: "Lunges" },
   { id: 3, name: "Pushups" },
   { id: 4, name: "Pullups" },
+  { id: 5, name: "BB Strict Press" },
+  { id: 6, name: "BB Push Press" },
+  { id: 7, name: "Bench Press" },
+  { id: 8, name: "BB Rowing" },
 ];
