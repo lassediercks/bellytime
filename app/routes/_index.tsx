@@ -8,15 +8,35 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+type Weekday =
+  | "monday"
+  | "tuesday"
+  | "wednesday"
+  | "thursday"
+  | "friday"
+  | "saturday"
+  | "sunday";
+
 interface Exercise {
-  id: number;
+  id: string;
   name: string;
 }
-
-interface TrainUnit {
+interface Unit {
+  id: string;
   exercise: Exercise;
   sets: number;
   reps: number;
+}
+interface Workout {
+  id: string;
+  name: string;
+  units: Unit[];
+}
+interface Plan {
+  id: string;
+  workouts: {
+    [Day in Weekday]: Workout[];
+  };
 }
 
 export default function Index() {
