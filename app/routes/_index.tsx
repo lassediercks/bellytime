@@ -40,26 +40,26 @@ interface Plan {
 }
 
 export default function Index() {
-  const [trainPlan, setTrainPlanState] = useState<TrainUnit[]>([]);
-  const [repValues, setRepValues] = useState<{ [key: number]: number }>({});
-  const [setValues, setSetValues] = useState<{ [key: number]: number }>({});
+  const [trainPlan, setTrainPlanState] = useState<Unit[]>([]);
+  const [repValues, setRepValues] = useState<{ [key: string]: number }>({});
+  const [setValues, setSetValues] = useState<{ [key: string]: number }>({});
 
   const addExercise = (exercise: Exercise, sets: number, reps: number) => {
     setTrainPlanState((prev) => {
-      return [...prev, { exercise, sets, reps }];
+      return [...prev, { id: crypto.randomUUID(), exercise, sets, reps }];
     });
     repValues[exercise.id] = 0;
     setValues[exercise.id] = 0;
   };
 
-  const handleRepChange = (id: number, value: number) => {
+  const handleRepChange = (id: string, value: number) => {
     setRepValues((prev) => ({
       ...prev,
       [id]: value,
     }));
   };
 
-  const handleSetChange = (id: number, value: number) => {
+  const handleSetChange = (id: string, value: number) => {
     setSetValues((prev) => ({
       ...prev,
       [id]: value,
@@ -91,14 +91,14 @@ export default function Index() {
             reps:
             <input
               className="bg-slate-50 border-slate-500 border-2"
-              type="number"
+              type="text"
               value={repValues[id] || ""}
               onChange={(e) => handleRepChange(id, parseInt(e.target.value))}
             />
             sets:
             <input
               className="bg-slate-50 border-slate-500 border-2"
-              type="number"
+              type="text"
               value={setValues[id] || ""}
               onChange={(e) => handleSetChange(id, parseInt(e.target.value))}
             />
@@ -119,6 +119,25 @@ export default function Index() {
         {trainPlan.map(({ exercise, sets, reps }, index) => (
           <div key={index}>
             {exercise.name} - reps: {reps} - sets: {sets}
+          </div>
+        ))}
+      </div>
+
+      <h1 className="text-2xl">Demo fertiger Plan</h1>
+      <div>
+        {Object.entries(plan.workouts).map(([day, workouts]) => (
+          <div key={day} className="mb-4">
+            <h2 className="text-xl">{day}</h2>
+            {workouts.map((workout, index) => (
+              <div key={index}>
+                <h3>Workout {workout.name}</h3>
+                {workout.units.map(({ exercise, sets, reps }, index) => (
+                  <div key={index}>
+                    {exercise.name} - reps: {reps} - sets: {sets}
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         ))}
       </div>
