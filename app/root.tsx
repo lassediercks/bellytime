@@ -1,5 +1,6 @@
 import {
   Links,
+  Link,
   Meta,
   Outlet,
   Scripts,
@@ -31,7 +32,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="p-12">
+        <div className="flex gap-4 py-5">
+          <Link to="/">Home</Link>
+          <Link to="/tracking">Tracking</Link>
+          <Link to="/workouts">Workouts</Link>
+        </div>
         {children}
         <ScrollRestoration />
         <Scripts />

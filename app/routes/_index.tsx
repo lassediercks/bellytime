@@ -40,6 +40,19 @@ interface Plan {
 }
 
 export default function Index() {
+  function WorkoutComp({ workout }: { workout: Workout }) {
+    return (
+      <div className="bg-slate-100">
+        <h3>{workout.name}</h3>
+        {workout.units.map((unit, index) => (
+          <div key={index}>
+            {unit.exercise.name} - reps: {unit.reps} - sets: {unit.sets}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   const [trainPlan, setTrainPlanState] = useState<Unit[]>([]);
   const [repValues, setRepValues] = useState<{ [key: string]: number }>({});
   const [setValues, setSetValues] = useState<{ [key: string]: number }>({});
@@ -129,14 +142,7 @@ export default function Index() {
           <div key={day} className="mb-4">
             <h2 className="text-xl">{day}</h2>
             {workouts.map((workout, index) => (
-              <div key={index}>
-                <h3>Workout {workout.name}</h3>
-                {workout.units.map(({ exercise, sets, reps }, index) => (
-                  <div key={index}>
-                    {exercise.name} - reps: {reps} - sets: {sets}
-                  </div>
-                ))}
-              </div>
+              <WorkoutComp key={index} workout={workout} />
             ))}
           </div>
         ))}
